@@ -26,7 +26,8 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	
 	int i = 0;
 	int size = 0;
-	Document doc;
+	Document docRecipe;
+	Document docIngredients;
 
 	@Override
 	public void initialize(UimaContext context)
@@ -34,7 +35,8 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 		super.initialize(context);
 		size = 1;
 		try {
-			doc = Jsoup.connect(url).get();
+			docRecipe = Jsoup.connect(url).get();
+			docIngredients = Jsoup.connect(url).get();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -53,8 +55,9 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	@Override
 	public void getNext(JCas jcas) throws IOException, CollectionException {
 		jcas.setDocumentLanguage("en");
-		String text = doc.select("div.directLeft").text();
-		jcas.setDocumentText(text);
+		String textRecipe = docRecipe.select("span.plaincharacterwrap").text();
+		String textIngredients = docIngredients.select("ul.ingredient-wrap").text();
+		jcas.setDocumentText(textIngredients + ".\n" + textRecipe);
 		i++;
 	}
 
