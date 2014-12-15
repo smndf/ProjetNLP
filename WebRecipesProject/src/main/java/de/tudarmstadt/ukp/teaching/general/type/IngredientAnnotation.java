@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon Dec 15 18:17:26 CET 2014
+ * Updated by JCasGen Mon Dec 15 19:20:39 CET 2014
  * XML source: /home/monordi/Cours/3A/TU/NLP/Exercices/ProjetNLP/WebRecipesProject/src/resources/desc/type/IngredientAnnotation.xml
  * @generated */
 public class IngredientAnnotation extends Annotation {
@@ -96,6 +96,28 @@ public class IngredientAnnotation extends Annotation {
     if (IngredientAnnotation_Type.featOkTst && ((IngredientAnnotation_Type)jcasType).casFeat_Amount == null)
       jcasType.jcas.throwFeatMissing("Amount", "de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation");
     jcasType.ll_cas.ll_setStringValue(addr, ((IngredientAnnotation_Type)jcasType).casFeatCode_Amount, v);}    
+   
+    
+  //*--------------*
+  //* Feature: NormalizedName
+
+  /** getter for NormalizedName - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getNormalizedName() {
+    if (IngredientAnnotation_Type.featOkTst && ((IngredientAnnotation_Type)jcasType).casFeat_NormalizedName == null)
+      jcasType.jcas.throwFeatMissing("NormalizedName", "de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((IngredientAnnotation_Type)jcasType).casFeatCode_NormalizedName);}
+    
+  /** setter for NormalizedName - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setNormalizedName(String v) {
+    if (IngredientAnnotation_Type.featOkTst && ((IngredientAnnotation_Type)jcasType).casFeat_NormalizedName == null)
+      jcasType.jcas.throwFeatMissing("NormalizedName", "de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation");
+    jcasType.ll_cas.ll_setStringValue(addr, ((IngredientAnnotation_Type)jcasType).casFeatCode_NormalizedName, v);}    
   }
 
     

@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon Dec 15 18:17:26 CET 2014
+ * Updated by JCasGen Mon Dec 15 19:20:39 CET 2014
  * @generated */
 public class IngredientAnnotation_Type extends Annotation_Type {
   /** @generated 
@@ -69,6 +69,30 @@ public class IngredientAnnotation_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_Amount, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_NormalizedName;
+  /** @generated */
+  final int     casFeatCode_NormalizedName;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getNormalizedName(int addr) {
+        if (featOkTst && casFeat_NormalizedName == null)
+      jcas.throwFeatMissing("NormalizedName", "de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_NormalizedName);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setNormalizedName(int addr, String v) {
+        if (featOkTst && casFeat_NormalizedName == null)
+      jcas.throwFeatMissing("NormalizedName", "de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation");
+    ll_cas.ll_setStringValue(addr, casFeatCode_NormalizedName, v);}
+    
+  
 
 
 
@@ -84,6 +108,10 @@ public class IngredientAnnotation_Type extends Annotation_Type {
  
     casFeat_Amount = jcas.getRequiredFeatureDE(casType, "Amount", "uima.cas.String", featOkTst);
     casFeatCode_Amount  = (null == casFeat_Amount) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Amount).getCode();
+
+ 
+    casFeat_NormalizedName = jcas.getRequiredFeatureDE(casType, "NormalizedName", "uima.cas.String", featOkTst);
+    casFeatCode_NormalizedName  = (null == casFeat_NormalizedName) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_NormalizedName).getCode();
 
   }
 }

@@ -15,12 +15,12 @@
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
-        <!-- featureDescription>
-          <name>Hypernym</name>
+        <featureDescription>
+          <name>NormalizedName</name>
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
-        <featureDescription>
+        <!--featureDescription>
           <name>TypeOf</name>
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
