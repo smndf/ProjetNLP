@@ -53,7 +53,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	@Override
 	public void getNext(JCas jcas) throws IOException, CollectionException {
 		jcas.setDocumentLanguage("en");
-		String text = doc.select("div[id=msgDirections]").text();
+		String text = doc.select("div#msgDirections").text();
 		jcas.setDocumentText(text);
 		i++;
 	}
