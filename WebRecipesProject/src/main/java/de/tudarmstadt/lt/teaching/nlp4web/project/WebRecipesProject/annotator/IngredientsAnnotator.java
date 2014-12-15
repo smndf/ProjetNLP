@@ -24,7 +24,7 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 		for (Annotation a : JCasUtil.select(jcas, Annotation.class)) {
 			begin = a.getBegin();
 			end = a.getEnd();
-			if (a instanceof NP) {
+			/*if (a instanceof NP) {
 					Pattern p = Pattern.compile("(.*)(such as)(.*)");
 					Matcher m = p.matcher(a.getCoveredText());
 					if (m.find()) {
@@ -85,69 +85,7 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 							}
 						}
 					}
-					Pattern p2 = Pattern.compile("(such\\s)(.+)(as)(.*)");
-					Matcher m2 = p2.matcher(a.getCoveredText());
-					if (m2.find()) {
-						for (POS a1 : JCasUtil.selectCovered(
-								jcas, POS.class,
-								begin + m2.start(3) , begin
-										+ m2.end(3))) {
-							if (a1.getType().getShortName().equals("NN")) {
-								HearstAnnotation hearstAnnotation = new HearstAnnotation(
-										jcas, begin, end);
-								List<Lemma> lemmas = JCasUtil.selectCovered(jcas,
-										Lemma.class, begin + m2.start(1),
-										begin + m2.end(1));
-								hearstAnnotation.setHyperonym(lemmas.get(0).getValue());
-								List<Lemma> lemmas1 = JCasUtil
-										.selectCovered(
-												jcas,
-												Lemma.class,
-												a1);
-								if (lemmas1.size() == 1){
-								hearstAnnotation.setHyponym(lemmas1
-										.get(0).getValue());
-								} else {
-									hearstAnnotation.setHyponym(a1.getCoveredText());
-								}
-								hearstAnnotation.setTypeOf("such NP0 as NP");
-								hearstAnnotation.addToIndexes();
-							}
-						}
-					}
-			}
-			if (a instanceof VP) {
-				Pattern p = Pattern.compile("(\\w*)( including| especially)(.*)");
-				Matcher m = p.matcher(a.getCoveredText());
-				if (m.find()) {
-					for (POS a1 : JCasUtil.selectCovered(
-							jcas, POS.class,
-							begin + m.start(3) , begin
-									+ m.end(3))) {
-						if (a1.getType().getShortName().equals("NN")) {
-							HearstAnnotation hearstAnnotation = new HearstAnnotation(
-									jcas, begin, end);
-							List<Lemma> lemmas = JCasUtil.selectCovered(jcas,
-									Lemma.class, begin + m.start(1),
-									begin + m.end(1));
-							hearstAnnotation.setHyperonym(lemmas.get(0).getValue());
-							List<Lemma> lemmas1 = JCasUtil
-									.selectCovered(
-											jcas,
-											Lemma.class,
-											a1);
-							if (lemmas1.size() == 1){
-							hearstAnnotation.setHyponym(lemmas1
-									.get(0).getValue());
-							} else {
-								hearstAnnotation.setHyponym(a1.getCoveredText());
-							}
-							hearstAnnotation.setTypeOf("NP0 including/ especially NP");
-							hearstAnnotation.addToIndexes();
-						}
-					}
-				}
-			}
+			}*/
 		}
 	}
 	
