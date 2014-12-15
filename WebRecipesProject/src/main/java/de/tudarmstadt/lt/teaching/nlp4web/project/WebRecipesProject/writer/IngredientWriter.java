@@ -10,7 +10,7 @@ import org.apache.uima.util.Level;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
 
-public class WebPageConsumer extends JCasConsumer_ImplBase {
+public class IngredientWriter extends JCasConsumer_ImplBase {
 
     public static final String LF = System.getProperty("line.separator");
 
@@ -24,10 +24,11 @@ public class WebPageConsumer extends JCasConsumer_ImplBase {
 
 		// Iterate over all annotations.
 		// Slower, but fetches all annotations.
-		for (Annotation a : JCasUtil.select(jcas, Annotation.class)) { {
+		for (IngredientAnnotation a : JCasUtil.select(jcas, IngredientAnnotation.class)) { {
 			sb.append("[" + a.getType().getShortName() + "] ");
 			sb.append("(" + a.getBegin() + ", " + a.getEnd() + ") ");
 			sb.append(a.getCoveredText());
+			sb.append("-> "+a.getAmount());
 			sb.append(LF);
 		}
 		sb.append(LF);
