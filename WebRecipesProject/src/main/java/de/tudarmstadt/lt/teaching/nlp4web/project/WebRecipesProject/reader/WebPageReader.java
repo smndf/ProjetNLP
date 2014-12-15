@@ -21,7 +21,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	@ConfigurationParameter(
 	name = URL,
 	description = "The URL to read the webpages from",
-	mandatory = true, defaultValue = "http://google.com")
+	mandatory = true, defaultValue = "http://allrecipes.com/recipe/alisons-slow-cooker-vegetable-beef-soup/")
 	private String url;
 	
 	int i = 0;
@@ -53,7 +53,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	@Override
 	public void getNext(JCas jcas) throws IOException, CollectionException {
 		jcas.setDocumentLanguage("en");
-		String text = doc.select("body").text();
+		String text = doc.select("div[id=msgDirections]").text();
 		jcas.setDocumentText(text);
 		i++;
 	}

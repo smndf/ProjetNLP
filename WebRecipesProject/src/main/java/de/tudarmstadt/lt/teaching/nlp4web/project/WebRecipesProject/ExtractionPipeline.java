@@ -11,6 +11,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.reader.WebPageReader;
+import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.writer.WebPageConsumer;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 
 public class ExtractionPipeline {
@@ -34,11 +35,11 @@ public class ExtractionPipeline {
 		        		SpellChecker.PARAM_MODEL_LOCATION,
 		        		"/Users/Fanny/Documents/2014_2015_Darmstadt/NLP_and_the_Web/dict/words");*/
 		        		
-		/*        AnalysisEngine writer = createEngine(
+		        AnalysisEngine writer = createEngine(
 		                WebPageConsumer.class
-		        );*/
+		        );
 
-		        SimplePipeline.runPipeline(reader, seg /*jazzy, writer*/);
+		        SimplePipeline.runPipeline(reader, seg /*jazzy,*/ ,writer);
 		    }
 
 }
