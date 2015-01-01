@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon Dec 15 19:20:39 CET 2014
+ * Updated by JCasGen Tue Dec 30 13:27:43 CET 2014
  * XML source: /home/monordi/Cours/3A/TU/NLP/Exercices/ProjetNLP/WebRecipesProject/src/resources/desc/type/IngredientAnnotation.xml
  * @generated */
 public class IngredientAnnotation extends Annotation {

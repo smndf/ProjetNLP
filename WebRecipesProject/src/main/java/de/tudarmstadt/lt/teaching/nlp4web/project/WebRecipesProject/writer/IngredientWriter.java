@@ -22,18 +22,16 @@ public class IngredientWriter extends JCasConsumer_ImplBase {
 		sb.append(jcas.getDocumentText()); sb.append(LF);
 		sb.append("-- IngredientAnnotation --"); sb.append(LF);
 
-		// Iterate over all annotations.
-		// Slower, but fetches all annotations.
-		for (IngredientAnnotation a : JCasUtil.select(jcas, IngredientAnnotation.class)) { {
+		for (IngredientAnnotation a : JCasUtil.select(jcas, IngredientAnnotation.class)) { 
 			sb.append("[" + a.getType().getShortName() + "] ");
 			sb.append("(" + a.getBegin() + ", " + a.getEnd() + ") ");
 			sb.append(a.getCoveredText());
-			sb.append("-> "+a.getAmount());
+			sb.append(" -> "+a.getAmount());
+			sb.append(" ("+a.getNormalizedName()+") ");
 			sb.append(LF);
 		}
 		sb.append(LF);
 		
         getContext().getLogger().log(Level.INFO, sb.toString());
-		}
 	}
 }

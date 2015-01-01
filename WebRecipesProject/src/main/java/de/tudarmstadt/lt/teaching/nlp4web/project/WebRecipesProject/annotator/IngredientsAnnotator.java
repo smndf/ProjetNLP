@@ -14,17 +14,43 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP;
+import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
 
 public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
-		int begin = 0;
-		int end = 0;
+		String document = jcas.getDocumentText();
+        int len = document.length();
+        int begin = 0;
+        int end = 0;
+
+        String amount = "[1-9][0-9]*";//"|[[1-9][0-9]]*[\\s?][1-9]/[1-9])";
+        String amountUnit = "pounds?|cups?|teaspoons?|tablespoons?";
+        String ingredient = "\\w*"; // supposed actually to be the next chunk
+        String regex = "(("+amount+")( ("+amountUnit+"))?) ("+ingredient+")";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(document);
+        
+		while (m.find()) {
+			IngredientAnnotation a = new IngredientAnnotation(jcas);
+			a.setBegin(m.start());
+			a.setEnd(m.end());
+			a.setAmount(m.group(1));
+			a.addToIndexes();
+			System.out.println("0 :"+m.group(0)+"\n"
+					+"1 :"+m.group(1)+"\n"
+					+"2 :"+m.group(2)+"\n"
+					+"3 :"+m.group(3)+"\n"
+					+"4 :"+m.group(4)+"\n"
+					);
+					
+		}
+		/*
 		for (Annotation a : JCasUtil.select(jcas, Annotation.class)) {
 			begin = a.getBegin();
 			end = a.getEnd();
-			/*if (a instanceof NP) {
+			if (a instanceof NP) {
 					Pattern p = Pattern.compile("(.*)(such as)(.*)");
 					Matcher m = p.matcher(a.getCoveredText());
 					if (m.find()) {
@@ -85,8 +111,8 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 							}
 						}
 					}
-			}*/
-		}
+			}
+		}*/
 	}
 	
 }

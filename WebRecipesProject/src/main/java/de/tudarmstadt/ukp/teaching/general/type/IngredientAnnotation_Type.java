@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon Dec 15 19:20:39 CET 2014
+ * Updated by JCasGen Tue Dec 30 13:27:43 CET 2014
  * @generated */
 public class IngredientAnnotation_Type extends Annotation_Type {
   /** @generated 

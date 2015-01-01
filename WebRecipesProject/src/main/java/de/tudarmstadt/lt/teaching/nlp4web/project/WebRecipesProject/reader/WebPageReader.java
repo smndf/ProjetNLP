@@ -17,11 +17,24 @@ import org.jsoup.nodes.Element;
 public class WebPageReader extends JCasCollectionReader_ImplBase {
 	
 
-	public static final String URL = "url";
+	/*public static final String PARAM_SELECTOR = "SELECTOR";
+	@ConfigurationParameter(name = PARAM_SELECTOR,
+			description = "css element to analyse",
+			mandatory = false, defaultValue = "body")
+	private String cssSelector;
+	*/
+	
+	public static final String PARAM_LANGUAGE = "LANGUAGE";
+	@ConfigurationParameter(name = PARAM_LANGUAGE,
+			description = "default language for the text",
+			mandatory = false, defaultValue = "en")
+	private String language;
+	
+	public static final String PARAM_URL = "url";
 	@ConfigurationParameter(
-	name = URL,
+	name = PARAM_URL,
 	description = "The URL to read the webpages from",
-	mandatory = true, defaultValue = "http://allrecipes.com/recipe/alisons-slow-cooker-vegetable-beef-soup/")
+	mandatory = true)
 	private String url;
 	
 	int i = 0;
@@ -54,10 +67,10 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 
 	@Override
 	public void getNext(JCas jcas) throws IOException, CollectionException {
-		jcas.setDocumentLanguage("en");
-		String textRecipe = docRecipe.select("span.plaincharacterwrap").text();
+		jcas.setDocumentLanguage(language);
+		//String textRecipe = docRecipe.select("span.plaincharacterwrap").text();
 		String textIngredients = docIngredients.select("ul.ingredient-wrap").text();
-		jcas.setDocumentText(textIngredients + ".\n" + textRecipe);
+		jcas.setDocumentText("2 cups water 1 small onion 2 potatoes, peeled and cubed 10 cubes beef bouillon, crumbled 2 teaspoons ground black pepper 1 tablespoon salt 1 tablespoon dried basil");//textIngredients);// + ".\n" + textRecipe);
 		i++;
 	}
 
