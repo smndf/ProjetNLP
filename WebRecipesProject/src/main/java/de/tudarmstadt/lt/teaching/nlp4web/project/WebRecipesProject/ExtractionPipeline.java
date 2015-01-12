@@ -15,6 +15,7 @@ import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.In
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.reader.WebPageReader;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.writer.IngredientWriter;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.writer.WebPageConsumer;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 
 public class ExtractionPipeline {
@@ -37,10 +38,8 @@ public class ExtractionPipeline {
 	        		DirectivesAnnotator.class
 		        );
 		        
-		        AnalysisEngine seg = createEngine(
-		        		//BreakIteratorSegmenter.class
-		        		StanfordSegmenter.class
-		        );
+		        AnalysisEngine seg =  createEngine(StanfordSegmenter.class);
+		    	AnalysisEngine parse =  createEngine(StanfordParser.class);
 
 		/*        AnalysisEngine jazzy =
 		        		createEngine
@@ -57,7 +56,13 @@ public class ExtractionPipeline {
 		                WebPageConsumer.class
 		        );
 
-		        SimplePipeline.runPipeline(reader, /*ingredientAnnotator,*/ directivesAnnotator, /*seg, jazzy,*/ ingredientWriter);
+		        SimplePipeline.runPipeline(
+		        		reader,
+		        		ingredientAnnotator,
+		        		directivesAnnotator,
+		        		seg,
+		        		parse,
+		        		ingredientWriter);
 		    }
 
 }
