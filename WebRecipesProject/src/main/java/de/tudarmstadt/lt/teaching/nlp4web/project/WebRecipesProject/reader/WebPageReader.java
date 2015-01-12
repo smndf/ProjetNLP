@@ -41,6 +41,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	int size = 0;
 	Document docRecipe;
 	Document docIngredients;
+	Document docTitle;
 
 	@Override
 	public void initialize(UimaContext context)
@@ -50,6 +51,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 		try {
 			docRecipe = Jsoup.connect(url).get();
 			docIngredients = Jsoup.connect(url).get();
+			docTitle = Jsoup.connect(url).get();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -68,6 +70,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	@Override
 	public void getNext(JCas jcas) throws IOException, CollectionException {
 		jcas.setDocumentLanguage(language);
+		String titleRecipe = docTitle.select("h1").text();
 		//String textRecipe = docRecipe.select("span.plaincharacterwrap").text();
 		String textIngredients = docIngredients.select("ul.ingredient-wrap").text();
 		jcas.setDocumentText("2 cups water 1 small onion 2 potatoes, peeled and cubed 10 cubes beef bouillon, crumbled 2 teaspoons ground black pepper 1 tablespoon salt 1 tablespoon dried basil");//textIngredients);// + ".\n" + textRecipe);
