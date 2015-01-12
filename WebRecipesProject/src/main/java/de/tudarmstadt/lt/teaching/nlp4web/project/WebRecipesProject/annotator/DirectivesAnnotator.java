@@ -7,6 +7,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP;
 
 public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 
@@ -17,15 +18,17 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
         int begin = 0;
         int end = 0 + len;
         
-        System.out.println("debut");
         for (Annotation a : JCasUtil.select(jcas, Annotation.class)){
-            System.out.println("annotation : " + a.getCoveredText());
-        	for (POS posTag : JCasUtil.selectCovered(jcas, POS.class, a.getBegin(), a.getBegin() + 20)){
-        		System.out.println("pos");
-            	if (posTag.getType().getShortName().equals("V")){
-            		System.out.println("coucou : " + posTag.getCoveredText());
-            	}
-            }        	
+        	System.out.println("nouvelle annotation : " + a.getCoveredText());
+            	for (POS posTag : JCasUtil.selectCovered(jcas, POS.class, a)){
+            		
+            		//System.out.println("pos : " + posTag.getCoveredText());
+            		
+                	if (posTag.getType().getShortName().equals("V")){	
+                		System.out.println("instruction : " + posTag.getCoveredText());
+                	}
+                }    
+//        	break;
         }
 	}
 
