@@ -58,10 +58,10 @@ public class ExtractionPipeline {
 
 		        SimplePipeline.runPipeline(
 		        		reader,
-		        		ingredientAnnotator,
-		        		directivesAnnotator,
 		        		seg,
 		        		parse,
+		        		ingredientAnnotator,
+		        		directivesAnnotator,
 		        		ingredientWriter);
 		    }
 
