@@ -17,14 +17,39 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP;
 import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
 
 public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
-
+ 
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
 		String document = jcas.getDocumentText();
         int len = document.length();
         int begin = 0;
         int end = 0;
-
+        
+        String NOMBRE = "[[1-9][0-9]*]"; //| [0-9].[0-9]* | y \in Numbers_in_letters
+        String FRACTION = "[[1-9]/[1-9]]";// | y \in Fraction_in_letters
+        //String UNIT = y \in Measure_unit | y \in Measure_tools
+        String QUANTITY = FRACTION+"|"+NOMBRE+"|["+NOMBRE+" "+FRACTION+"]";// | y \in Other_quantities
+        
+//        String REGEX1 = QUANTITY+" "+UNIT+" "+QUALIFIERS+" "+INGREDIENT;
+//        String REGEX2 = QUANTITY+" "+QUALIFIERS+" "+INGREDIENT; 
+//        String REGEX3 = UNIT+" "+QUALIFIERS+" "+INGREDIENT;
+//        String REGEX4 = QUALIFIERS+" "+INGREDIENT;
+//        String REGEX5 = INGREDIENT+" "+QUALIFIERS;
+        /*
+        boolean finished = false;
+        
+        String remainingText = document;
+        String quantity = null;
+        Matcher mQuantity = Pattern.compile(QUANTITY).matcher(remainingText);
+        if (mQuantity.find()) {
+        	// QUANTITY
+        	quantity = mQuantity.group();
+        	System.out.println("quantity : "+quantity);
+        	remainingText 
+        	Matcher mQuantity = Pattern.compile(QUANTITY).matcher(remainingText);
+        }*/
+        
+        
         String amount = "[1-9][0-9]*";//"|[[1-9][0-9]]*[\\s?][1-9]/[1-9])";
         String amountUnit = "pounds?|cups?|teaspoons?|tablespoons?";
         String ingredient = "\\w*"; // supposed actually to be the next chunk
