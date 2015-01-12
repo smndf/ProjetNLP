@@ -10,6 +10,7 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 
+import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.DirectivesAnnotator;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.IngredientsAnnotator;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.reader.WebPageReader;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.writer.IngredientWriter;
@@ -31,6 +32,11 @@ public class ExtractionPipeline {
 	        		IngredientsAnnotator.class
 		        );
 		        
+		        AnalysisEngine directivesAnnotator = createEngine(
+		        		//BreakIteratorSegmenter.class
+	        		DirectivesAnnotator.class
+		        );
+		        
 		        AnalysisEngine seg = createEngine(
 		        		//BreakIteratorSegmenter.class
 		        		StanfordSegmenter.class
@@ -45,12 +51,13 @@ public class ExtractionPipeline {
 		        AnalysisEngine ingredientWriter = createEngine(
 		                IngredientWriter.class
 		        );
+		   
 		        
 		        AnalysisEngine writer = createEngine(
 		                WebPageConsumer.class
 		        );
 
-		        SimplePipeline.runPipeline(reader, ingredientAnnotator, /*seg, jazzy,*/ ingredientWriter);
+		        SimplePipeline.runPipeline(reader, /*ingredientAnnotator,*/ directivesAnnotator, /*seg, jazzy,*/ ingredientWriter);
 		    }
 
 }
