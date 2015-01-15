@@ -165,6 +165,10 @@ public class UnitAnnotator extends JCasAnnotator_ImplBase {
 
 	private void setUnitAnnotation(JCas jcas, CARD number, Token unit_ingredient,
 			String type) {
+		
+		// get the lemmata
+				Lemma lemma = JCasUtil.selectCovered(jcas, Lemma.class, unit_ingredient.getBegin(),
+						unit_ingredient.getEnd()).get(0);
 		/*
 		 * create a new UnitAnnotation
 		 */
@@ -173,7 +177,7 @@ public class UnitAnnotator extends JCasAnnotator_ImplBase {
 		a.setEnd(unit_ingredient.getEnd());
 		a.setTypeOf(type);
 		a.setQuantity(number.getCoveredText());
-		a.setUnit(unit_ingredient.getLemma().getCoveredText());
+		a.setUnit(unit_ingredient.getLemma().getValue());
 		a.addToIndexes();
 
 	} // setUnitAnnotation()
