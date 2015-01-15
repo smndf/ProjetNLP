@@ -8,6 +8,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.util.Level;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation;
 import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
 
 public class IngredientWriter extends JCasConsumer_ImplBase {
@@ -28,6 +29,14 @@ public class IngredientWriter extends JCasConsumer_ImplBase {
 			sb.append(a.getCoveredText());
 			sb.append(" -> "+a.getAmount());
 			sb.append(" ("+a.getNormalizedName()+") ");
+			sb.append(LF);
+		}
+		sb.append(LF);
+
+		for (DirectivesAnnotation a : JCasUtil.select(jcas, DirectivesAnnotation.class)) { 
+			sb.append("[" + a.getType().getShortName() + "] ");
+			sb.append("(" + a.getBegin() + ", " + a.getEnd() + ") ");
+			sb.append(a.getCoveredText());
 			sb.append(LF);
 		}
 		sb.append(LF);

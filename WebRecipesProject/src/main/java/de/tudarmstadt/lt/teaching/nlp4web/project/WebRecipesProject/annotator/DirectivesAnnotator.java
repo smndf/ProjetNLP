@@ -8,6 +8,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP;
+import de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation;
+import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
 
 public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 
@@ -17,17 +19,21 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
         int len = document.length();
         int begin = 0;
         int end = 0 + len;
-        
+                
         for (Annotation a : JCasUtil.select(jcas, Annotation.class)){
-        	System.out.println("nouvelle annotation : " + a.getCoveredText());
-            	for (POS posTag : JCasUtil.selectCovered(jcas, POS.class, a)){
-            		
-            		//System.out.println("pos : " + posTag.getCoveredText());
-            		
-                	if (posTag.getType().getShortName().equals("V")){	
-                		System.out.println("instruction : " + posTag.getCoveredText());
-                	}
-                }    
+        	
+        	if (a.getType().getShortName().equals("V")){
+        		System.out.println("nouvelle annotation : " + a.getCoveredText());
+            	System.out.println("type : " + a.getType().getShortName());
+            	//for (POS posTag : JCasUtil.selectCovered(jcas, POS.class, a)){
+            		System.out.println(" create annotation instruction : " + a.getCoveredText());
+            		DirectivesAnnotation d = new DirectivesAnnotation(jcas);
+        			d.setBegin(a.getBegin());
+        			d.setEnd(a.getEnd());
+        			d.setInstruction(a.getCoveredText());
+        			d.addToIndexes();
+            	//}
+        	}            		
 //        	break;
         }
 	}
