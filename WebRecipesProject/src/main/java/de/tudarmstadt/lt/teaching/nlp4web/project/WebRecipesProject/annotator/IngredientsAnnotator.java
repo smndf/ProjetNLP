@@ -63,12 +63,13 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 			a.setEnd(m.end());
 			a.setAmount(m.group(1));
 			a.addToIndexes();
-			System.out.println("0 :"+m.group(0)+"\n"
+			/*System.out.println("0 :"+m.group(0)+"\n"
 					+"1 :"+m.group(1)+"\n"
 					+"2 :"+m.group(2)+"\n"
 					+"3 :"+m.group(3)+"\n"
 					+"4 :"+m.group(4)+"\n"
 					);
+					*/
 					
 		}
 		/*

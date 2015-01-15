@@ -29,7 +29,7 @@ public class UnitWriter extends JCasConsumer_ImplBase {
 			sb.append("(" + a.getBegin() + ", " + a.getEnd() + ") ");
 			sb.append("[Quantity: "+a.getQuantity()+"]");
 			sb.append("[Unit: "+a.getUnit()+"]");
-			sb.append("[TypeOf: "+a.getTypeOf()+"]");
+			sb.append("[TypeOf: "+a.getTypeOf()+"] ");
 			sb.append(a.getCoveredText());
 			sb.append(LF);
 		}

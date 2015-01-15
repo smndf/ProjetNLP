@@ -35,12 +35,10 @@ public class ExtractionPipeline {
 		        );
 		        
 		        AnalysisEngine ingredientAnnotator = createEngine(
-		        		//BreakIteratorSegmenter.class
 	        		IngredientsAnnotator.class
 		        );
 		        
 		        AnalysisEngine directivesAnnotator = createEngine(
-		        		//BreakIteratorSegmenter.class
 	        		DirectivesAnnotator.class
 		        );
 		        
@@ -73,7 +71,8 @@ public class ExtractionPipeline {
 		        		ingredientAnnotator,
 		        		directivesAnnotator,
 		        		ingredientWriter,
-		        		unitWriter);
+		        		unitWriter
+		        		);
 		    }
 
 }
