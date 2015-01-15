@@ -73,7 +73,9 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 		String titleRecipe = docTitle.select("h1").text();
 		String textRecipe = docRecipe.select("span.plaincharacterwrap").text();
 		String textIngredients = docIngredients.select("ul.ingredient-wrap").text();
-		jcas.setDocumentText(/*"2 cups water 1 small onion 2 potatoes, peeled and cubed 10 cubes beef bouillon, crumbled 2 teaspoons ground black pepper 1 tablespoon salt 1 tablespoon dried basil");textIngredients); + ".\n" +*/ textRecipe);
+		//jcas.setDocumentText(/*"2 cups water 1 small onion 2 potatoes, peeled and cubed 10 cubes beef bouillon, crumbled 2 teaspoons ground black pepper 1 tablespoon salt 1 tablespoon dried basil");textIngredients); + ".\n" +*/ textRecipe);
+		String docText = titleRecipe + "\n" + textRecipe + "\n" + textIngredients ;
+		jcas.setDocumentText(docText);
 		i++;
 	}
 

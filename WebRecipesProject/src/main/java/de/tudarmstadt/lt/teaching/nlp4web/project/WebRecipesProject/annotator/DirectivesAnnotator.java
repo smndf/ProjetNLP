@@ -15,12 +15,13 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
-		String document = jcas.getDocumentText();
-        int len = document.length();
-        int begin = 0;
-        int end = 0 + len;
+		String doc = jcas.getDocumentText();
+		String[] documents = doc.split("\n");
+        int len = documents[1].length();
+        int begin = documents[0].length();
+        int end = begin + len;
                 
-        for (Annotation a : JCasUtil.select(jcas, Annotation.class)){
+        for (Annotation a : JCasUtil.selectCovered(jcas, Annotation.class, begin, end)){
         	
         	if (a.getType().getShortName().equals("V")){
         		System.out.println("nouvelle annotation : " + a.getCoveredText());
