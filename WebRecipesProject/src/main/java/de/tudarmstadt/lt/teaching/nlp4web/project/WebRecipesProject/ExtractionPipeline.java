@@ -12,8 +12,10 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.DirectivesAnnotator;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.IngredientsAnnotator;
+import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.UnitAnnotator;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.reader.WebPageReader;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.writer.IngredientWriter;
+import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.writer.UnitWriter;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.writer.WebPageConsumer;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
@@ -26,6 +28,10 @@ public class ExtractionPipeline {
 		    			
 		        CollectionReader reader = createReader(
 		                WebPageReader.class,  WebPageReader.PARAM_URL, "http://allrecipes.com/recipe/alisons-slow-cooker-vegetable-beef-soup/"
+		        );
+		        
+		        AnalysisEngine unitAnnotator = createEngine(
+	        		UnitAnnotator.class
 		        );
 		        
 		        AnalysisEngine ingredientAnnotator = createEngine(
@@ -51,6 +57,9 @@ public class ExtractionPipeline {
 		                IngredientWriter.class
 		        );
 		   
+		        AnalysisEngine unitWriter = createEngine(
+		                UnitWriter.class
+		        );
 		        
 		        AnalysisEngine writer = createEngine(
 		                WebPageConsumer.class
@@ -60,9 +69,11 @@ public class ExtractionPipeline {
 		        		reader,
 		        		seg,
 		        		parse,
+		        		unitAnnotator,
 		        		ingredientAnnotator,
 		        		directivesAnnotator,
-		        		ingredientWriter);
+		        		ingredientWriter,
+		        		unitWriter);
 		    }
 
 }

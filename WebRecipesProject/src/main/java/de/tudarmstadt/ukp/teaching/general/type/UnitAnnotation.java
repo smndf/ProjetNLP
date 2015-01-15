@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon Jan 12 18:31:51 CET 2015
+ * Updated by JCasGen Thu Jan 15 15:08:17 CET 2015
  * XML source: /home/monordi/Cours/3A/TU/NLP/Exercices/ProjetNLP/WebRecipesProject/src/main/resources/desc/type/UnitAnnotation.xml
  * @generated */
 public class UnitAnnotation extends Annotation {
@@ -96,6 +96,50 @@ public class UnitAnnotation extends Annotation {
     if (UnitAnnotation_Type.featOkTst && ((UnitAnnotation_Type)jcasType).casFeat_Unit == null)
       jcasType.jcas.throwFeatMissing("Unit", "de.tudarmstadt.ukp.teaching.general.type.UnitAnnotation");
     jcasType.ll_cas.ll_setStringValue(addr, ((UnitAnnotation_Type)jcasType).casFeatCode_Unit, v);}    
+   
+    
+  //*--------------*
+  //* Feature: Quantity
+
+  /** getter for Quantity - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getQuantity() {
+    if (UnitAnnotation_Type.featOkTst && ((UnitAnnotation_Type)jcasType).casFeat_Quantity == null)
+      jcasType.jcas.throwFeatMissing("Quantity", "de.tudarmstadt.ukp.teaching.general.type.UnitAnnotation");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((UnitAnnotation_Type)jcasType).casFeatCode_Quantity);}
+    
+  /** setter for Quantity - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setQuantity(String v) {
+    if (UnitAnnotation_Type.featOkTst && ((UnitAnnotation_Type)jcasType).casFeat_Quantity == null)
+      jcasType.jcas.throwFeatMissing("Quantity", "de.tudarmstadt.ukp.teaching.general.type.UnitAnnotation");
+    jcasType.ll_cas.ll_setStringValue(addr, ((UnitAnnotation_Type)jcasType).casFeatCode_Quantity, v);}    
+   
+    
+  //*--------------*
+  //* Feature: TypeOf
+
+  /** getter for TypeOf - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getTypeOf() {
+    if (UnitAnnotation_Type.featOkTst && ((UnitAnnotation_Type)jcasType).casFeat_TypeOf == null)
+      jcasType.jcas.throwFeatMissing("TypeOf", "de.tudarmstadt.ukp.teaching.general.type.UnitAnnotation");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((UnitAnnotation_Type)jcasType).casFeatCode_TypeOf);}
+    
+  /** setter for TypeOf - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setTypeOf(String v) {
+    if (UnitAnnotation_Type.featOkTst && ((UnitAnnotation_Type)jcasType).casFeat_TypeOf == null)
+      jcasType.jcas.throwFeatMissing("TypeOf", "de.tudarmstadt.ukp.teaching.general.type.UnitAnnotation");
+    jcasType.ll_cas.ll_setStringValue(addr, ((UnitAnnotation_Type)jcasType).casFeatCode_TypeOf, v);}    
   }
 
     
