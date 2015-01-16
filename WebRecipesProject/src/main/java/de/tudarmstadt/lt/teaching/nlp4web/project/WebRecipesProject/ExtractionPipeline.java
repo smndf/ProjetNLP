@@ -26,8 +26,9 @@ public class ExtractionPipeline {
 		    	throws UIMAException, IOException
 		    {
 		    			
+		        String webpage = "http://allrecipes.com/recipe/alisons-slow-cooker-vegetable-beef-soup/";
 		        CollectionReader reader = createReader(
-		                WebPageReader.class,  WebPageReader.PARAM_URL, "http://allrecipes.com/recipe/alisons-slow-cooker-vegetable-beef-soup/"
+		                WebPageReader.class,  WebPageReader.PARAM_URL, webpage 
 		        );
 		        
 		        AnalysisEngine unitAnnotator = createEngine(

@@ -73,7 +73,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 		String titleRecipe = docTitle.select("h1").text();
 		String textRecipe = docRecipe.select("span.plaincharacterwrap").text();
 		String textIngredients = docIngredients.select("ul.ingredient-wrap").text();
-		//jcas.setDocumentText(textIngredients);
+//		jcas.setDocumentText(textIngredients);
 		String docText = titleRecipe + "\n" + textRecipe + "\n" + textIngredients ;
 		jcas.setDocumentText(docText);
 		i++;
