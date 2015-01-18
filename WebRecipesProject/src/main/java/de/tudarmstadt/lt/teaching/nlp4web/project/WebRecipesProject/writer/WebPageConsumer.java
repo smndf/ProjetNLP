@@ -20,7 +20,7 @@ public class WebPageConsumer extends JCasConsumer_ImplBase {
 		sb.append("=== CAS ==="); sb.append(LF);
 		sb.append("-- Document Text --"); sb.append(LF);
 		sb.append(jcas.getDocumentText()); sb.append(LF);
-		sb.append("-- IngredientAnnotation --"); sb.append(LF);
+		sb.append("-- All Annotations --"); sb.append(LF);
 
 		// Iterate over all annotations.
 		// Slower, but fetches all annotations.

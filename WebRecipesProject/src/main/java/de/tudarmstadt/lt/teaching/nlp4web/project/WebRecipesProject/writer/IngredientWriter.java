@@ -26,13 +26,15 @@ public class IngredientWriter extends JCasConsumer_ImplBase {
 		for (IngredientAnnotation a : JCasUtil.select(jcas, IngredientAnnotation.class)) { 
 			sb.append("[" + a.getType().getShortName() + "] ");
 			sb.append("(" + a.getBegin() + ", " + a.getEnd() + ") ");
+			sb.append("[Amount: "+a.getAmount()+"]");
+			sb.append("[NormalizedName: "+a.getNormalizedName()+"] ");
 			sb.append(a.getCoveredText());
-			sb.append(" -> "+a.getAmount());
-			sb.append(" ("+a.getNormalizedName()+") ");
+
 			sb.append(LF);
 		}
 		sb.append(LF);
 
+		sb.append("-- DirectivesAnnotation --"); sb.append(LF);
 		for (DirectivesAnnotation a : JCasUtil.select(jcas, DirectivesAnnotation.class)) { 
 			sb.append("[" + a.getType().getShortName() + "] ");
 			sb.append("(" + a.getBegin() + ", " + a.getEnd() + ") ");

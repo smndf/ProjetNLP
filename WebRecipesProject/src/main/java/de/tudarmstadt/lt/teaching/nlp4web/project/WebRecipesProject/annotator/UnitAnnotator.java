@@ -99,7 +99,7 @@ public class UnitAnnotator extends JCasAnnotator_ImplBase {
 				try {
 					// check the covered NP (noun chunk)
 					List<NP> nps = JCasUtil.selectCovered(jcas, NP.class,
-							number.getBegin(), jcas.getDocumentText().length());
+							number.getBegin(), sentence.getEnd());
 					NP unit_ingredient = nps.get(0);
 					System.out.println("unit_ingredient : "
 							+ unit_ingredient.getCoveredText());
@@ -180,13 +180,11 @@ public class UnitAnnotator extends JCasAnnotator_ImplBase {
 						unit_ingredient = JCasUtil.selectFollowing(jcas,
 								Token.class, prn, 1).get(0);
 					}
-					System.out.println("unit_ingredient : "
-							+ unit_ingredient.getCoveredText());
 
 					{
 						// test that unit_ingredient is a noun
 						String posValue = unit_ingredient.getPos().getPosValue();
-						System.out.println("POS tag : "+ posValue);
+//						System.out.println("POS tag : "+ posValue);
 						if (posValue == null) {
 							throw new RuntimeException("Fatal error : POS attribute of Token not initialized !! ");
 						} else {

@@ -13,6 +13,7 @@ import org.apache.uima.util.ProgressImpl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class WebPageReader extends JCasCollectionReader_ImplBase {
 	
@@ -70,10 +71,19 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	@Override
 	public void getNext(JCas jcas) throws IOException, CollectionException {
 		jcas.setDocumentLanguage(language);
-		String titleRecipe = docTitle.select("h1").text();
+		
+		String titleRecipe = docTitle.select("h1").text(); // proposition : select("title").text()
 		String textRecipe = docRecipe.select("span.plaincharacterwrap").text();
-		String textIngredients = docIngredients.select("ul.ingredient-wrap").text();
-//		jcas.setDocumentText(textIngredients);
+		
+		// old version : String textIngredients = docIngredients.select("ul.ingredient-wrap").text();
+		// Fetch the ingredients one by one
+		String textIngredients = "";
+		Elements elts = docIngredients.select("p.fl-ing");
+		for (Element e : elts) {
+			textIngredients += e.text()+".\n";
+		}
+		
+		//jcas.setDocumentText(textIngredients);//recipe);
 		String docText = titleRecipe + "\n" + textRecipe + "\n" + textIngredients ;
 		jcas.setDocumentText(docText);
 		i++;

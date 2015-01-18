@@ -69,10 +69,10 @@ public class ExtractionPipeline {
 		        		seg,
 		        		parse,
 		        		unitAnnotator,
+		        		unitWriter,
 		        		ingredientAnnotator,
 		        		directivesAnnotator,
-		        		ingredientWriter,
-		        		unitWriter
+		        		ingredientWriter		        		
 		        		);
 		    }
 
