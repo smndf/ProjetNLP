@@ -50,7 +50,7 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 					List<NP> nps = JCasUtil.selectCovered(jcas, NP.class,
 							quantity.getBegin(), sentence.getEnd());
 					NP np = nps.get(0);
-					NN ingredient = checkNP(jcas, np, quantity.getEnd()+1, quantity);
+					NN ingredient = checkNP(jcas, np, quantity.getEnd()+1, quantity, sentence);
 					setIngredientAnnotation(jcas, ingredient, quantity);
 				} catch (IndexOutOfBoundsException e) {
 					System.out.println("IndexOutOfBoundsException");
@@ -72,7 +72,7 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 	 * @param searchAreaStart
 	 * @param quantity 
 	 */
-	private NN checkNP(JCas jcas, NP np, int searchAreaStart, UnitAnnotation quantity) {
+	private NN checkNP(JCas jcas, NP np, int searchAreaStart, UnitAnnotation quantity, Sentence sentence) {
 		System.out.println("NP ingredient : "
 				+ np.getCoveredText());
 
@@ -89,8 +89,22 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 				
 				// look in NP just after the current one
 				NP nextNP = JCasUtil.selectFollowing(jcas,
-						NP.class, np, 1).get(0);;
-				return checkNP(jcas, nextNP, nextNP.getBegin(), quantity);
+						NP.class, np, 1).get(0);
+				// if there is a CARD/UnitAnnotation between quantity and nextNP then roll back
+				List<UnitAnnotation> units = JCasUtil.selectCovered(jcas,
+						UnitAnnotation.class, quantity.getEnd(),
+						nextNP.getEnd());
+				if (units.size() > 0) {
+					System.out.println("units.size() > 0 "+quantity.getCoveredText()+"<>"+nextNP.getCoveredText());
+					return null;
+				}
+				// if nextNP is outside of the quantity sentence then roll back
+				if (nextNP.getEnd() > sentence.getEnd()) {
+					System.out.println("nextNP out of sentence "+quantity.getCoveredText()+"<>"+nextNP.getCoveredText());
+					return null;
+				}
+				// else check the NP found
+				return checkNP(jcas, nextNP, nextNP.getBegin(), quantity, sentence);
 			} else  if (nbNN == 1) {
 				return nouns.get(0);
 			} else {
@@ -106,9 +120,18 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 		 * create a new IngredientAnnotation
 		 */
 		IngredientAnnotation a = new IngredientAnnotation(jcas);
+		if (ingredient == null) {
+			// roll back
+			// get the wrong unit from the UnitAnnotation 
+			ingredient = JCasUtil.selectCovered(jcas, NN.class,
+								quantity.getBegin(), quantity.getEnd()).get(0);
+			// remove it from text covered by the UnitAnnotation
+			quantity.setUnit(null);
+			quantity.setEnd(ingredient.getBegin() - 1);
+		} 
 		// get the lemmata
-		Lemma lemma = JCasUtil.selectCovered(jcas, Lemma.class, ingredient.getBegin(),
-				ingredient.getEnd()).get(0);
+		Lemma lemma = JCasUtil.selectCovered(jcas, Lemma.class,
+				ingredient.getBegin(), ingredient.getEnd()).get(0);
 		a.setBegin(ingredient.getBegin());
 		a.setEnd(ingredient.getEnd());
 		a.setAmount(quantity.getCoveredText());
