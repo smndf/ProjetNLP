@@ -10,6 +10,7 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 
+import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.AmountAnnotator;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.DirectivesAnnotator;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.IngredientsAnnotator;
 import de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.annotator.UnitAnnotator;
@@ -30,6 +31,10 @@ public class ExtractionPipeline {
 		        CollectionReader reader = createReader(
 		                WebPageReader.class,  WebPageReader.PARAM_URL, webpage 
 		        );
+		        
+		        AnalysisEngine amountAnnotator = createEngine(
+		        		AmountAnnotator.class
+			        );
 		        
 		        AnalysisEngine unitAnnotator = createEngine(
 	        		UnitAnnotator.class
@@ -68,11 +73,12 @@ public class ExtractionPipeline {
 		        		reader,
 		        		seg,
 		        		parse,
+		        		//amountAnnotator,
 		        		unitAnnotator,
 		        		unitWriter,
 		        		ingredientAnnotator,
 		        		directivesAnnotator,
-		        		ingredientWriter		        		
+		        		ingredientWriter        		
 		        		);
 		    }
 

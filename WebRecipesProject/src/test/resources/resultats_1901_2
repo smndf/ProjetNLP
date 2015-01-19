@@ -1,7 +1,5 @@
-TODO				   	  KO	| OK	| KO secondary	| OK secondary	| Total OK	| Total KO	| 
-splitByFollowingNP 	| 11/11	| 1/11	|		1/2		|		0/2		|	1/13	|	12/13	|
-splitByCoveredNP   	| 4/11	| 7/11	|		0/2		|		2/2		|	9/13	|	1/13	|
-splitByToken       	| 1/11	| 11/11	|		0/2		|		2/2		|	12/13	|	1/11	|
+     			   	  KO	| OK	| KO secondary	| OK secondary	| Total OK	| Total KO	| 
+splitByToken       	| 4/10	| 6/10	|		0/2		|		2/2		|	8/12	|	4/12	|
 http://allrecipes.com/recipe/alisons-slow-cooker-vegetable-beef-soup/
 
 janv. 18, 2015 11:47:27 PM de.tudarmstadt.lt.teaching.nlp4web.project.WebRecipesProject.writer.IngredientWriter process(46)
@@ -19,20 +17,23 @@ INFOS: === CAS ===
 1 tablespoon dried basil.
 
 -- UnitAnnotation --
-[UnitAnnotation] (0, 12) [Quantity: 1 1/2][Unit: pound][TypeOf: splitByToken] 1 1/2 pounds
-[UnitAnnotation] (35, 41) [Quantity: 2][Unit: cup][TypeOf: splitByToken] 2 cups
-[UnitAnnotation] (49, 50) [Quantity: 1][Unit: null][TypeOf: splitByToken] 1
-[UnitAnnotation] (76, 84) [Quantity: 28][Unit: ounce][TypeOf: splitByToken] 28 ounce
-[UnitAnnotation] (111, 119) [Quantity: 16][Unit: ounce][TypeOf: splitByToken] 16 ounce
-[UnitAnnotation] (154, 164) [Quantity: 2][Unit: potato][TypeOf: splitByToken] 2 potatoes
-[UnitAnnotation] (184, 192) [Quantity: 10][Unit: cube][TypeOf: splitByToken] 10 cubes
-[UnitAnnotation] (218, 229) [Quantity: 2][Unit: teaspoon][TypeOf: splitByToken] 2 teaspoons
-[UnitAnnotation] (270, 282) [Quantity: 1][Unit: tablespoon][TypeOf: splitByToken] 1 tablespoon
+pound OK[UnitAnnotation] (0, 12) [Quantity: 1 1/2][Unit: pound][TypeOf: splitByToken] 1 1/2 pounds
+cup OK[UnitAnnotation] (35, 41) [Quantity: 2][Unit: cup][TypeOf: splitByToken] 2 cups
+NULL OK[UnitAnnotation] (49, 50) [Quantity: 1][Unit: null][TypeOf: splitByToken] 1
+KO 1 (28 ounce) can [TypeOf: splitByToken]
+ounce OK[UnitAnnotation] (76, 84) [Quantity: 28][Unit: ounce][TypeOf: splitByToken] 28 ounce
+KO 1 (16 ounce) package [TypeOf: splitByToken]
+ounce OK[UnitAnnotation] (111, 119) [Quantity: 16][Unit: ounce][TypeOf: splitByToken] 16 ounce
+NULL KO[UnitAnnotation] (154, 164) [Quantity: 2][Unit: potato][TypeOf: splitByToken] 2 potatoes
+cube OK[UnitAnnotation] (184, 192) [Quantity: 10][Unit: cube][TypeOf: splitByToken] 10 cubes
+teaspoon OK[UnitAnnotation] (218, 229) [Quantity: 2][Unit: teaspoon][TypeOf: splitByToken] 2 teaspoons
+tablespoon OK[UnitAnnotation] (270, 282) [Quantity: 1][Unit: tablespoon][TypeOf: splitByToken] 1 tablespoon
+KO : 1 tablespoon (forgotten) 
 
 -- IngredientAnnotation --
-[IngredientAnnotation] (29, 33) [Amount: 1 1/2 pounds][NormalizedName: meat] meat
-[IngredientAnnotation] (42, 47) [Amount: 2 cups][NormalizedName: water] water
-[IngredientAnnotation] (57, 62) [Amount: 1][NormalizedName: onion] onion
+meat OK [IngredientAnnotation] (29, 33) [Amount: 1 1/2 pounds][NormalizedName: meat] meat
+water OK [IngredientAnnotation] (42, 47) [Amount: 2 cups][NormalizedName: water] water
+onion OK [IngredientAnnotation] (57, 62) [Amount: 1][NormalizedName: onion] onion
 [IngredientAnnotation] (98, 106) [Amount: 28 ounce][NormalizedName: tomato] tomatoes
 [IngredientAnnotation] (121, 128) [Amount: 16 ounce][NormalizedName: package] package
 [IngredientAnnotation] (198, 206) [Amount: 2 potatoes][NormalizedName: bouillon] bouillon

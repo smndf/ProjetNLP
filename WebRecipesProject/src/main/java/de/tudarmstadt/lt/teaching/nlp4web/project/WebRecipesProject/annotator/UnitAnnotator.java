@@ -174,7 +174,7 @@ public class UnitAnnotator extends JCasAnnotator_ImplBase {
 					Token unit_ingredient = JCasUtil.selectFollowing(jcas,
 							Token.class, number, 1).get(0);
 					if (unit_ingredient.getCoveredText().equals("(")) {
-						// find the next token witch not part of a PRN : expression parenthesee
+						// find the next token which is not part of a PRN : expression parenthesee
 						prn = JCasUtil.selectFollowing(jcas, PRN.class,
 								number, 1).get(0);
 						unit_ingredient = JCasUtil.selectFollowing(jcas,
