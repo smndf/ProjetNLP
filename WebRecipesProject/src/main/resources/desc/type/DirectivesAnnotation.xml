@@ -20,6 +20,16 @@
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
+        <featureDescription>
+          <name>Ingredient</name>
+          <description/>
+          <rangeTypeName>uima.cas.StringList</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>ResultingEntity</name>
+          <description/>
+          <rangeTypeName>uima.cas.StringList</rangeTypeName>
+        </featureDescription>
         <!--featureDescription>
           <name>TypeOf</name>
           <description/>

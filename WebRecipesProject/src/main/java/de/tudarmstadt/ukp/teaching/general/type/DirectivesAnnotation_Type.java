@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu Jan 15 11:40:18 CET 2015
+ * Updated by JCasGen Mon Jan 19 16:54:05 CET 2015
  * @generated */
 public class DirectivesAnnotation_Type extends Annotation_Type {
   /** @generated 
@@ -93,6 +93,54 @@ public class DirectivesAnnotation_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_NormalizedName, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_Ingredient;
+  /** @generated */
+  final int     casFeatCode_Ingredient;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public int getIngredient(int addr) {
+        if (featOkTst && casFeat_Ingredient == null)
+      jcas.throwFeatMissing("Ingredient", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_Ingredient);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setIngredient(int addr, int v) {
+        if (featOkTst && casFeat_Ingredient == null)
+      jcas.throwFeatMissing("Ingredient", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
+    ll_cas.ll_setRefValue(addr, casFeatCode_Ingredient, v);}
+    
+  
+ 
+  /** @generated */
+  final Feature casFeat_ResultingEntity;
+  /** @generated */
+  final int     casFeatCode_ResultingEntity;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public int getResultingEntity(int addr) {
+        if (featOkTst && casFeat_ResultingEntity == null)
+      jcas.throwFeatMissing("ResultingEntity", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_ResultingEntity);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setResultingEntity(int addr, int v) {
+        if (featOkTst && casFeat_ResultingEntity == null)
+      jcas.throwFeatMissing("ResultingEntity", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
+    ll_cas.ll_setRefValue(addr, casFeatCode_ResultingEntity, v);}
+    
+  
 
 
 
@@ -112,6 +160,14 @@ public class DirectivesAnnotation_Type extends Annotation_Type {
  
     casFeat_NormalizedName = jcas.getRequiredFeatureDE(casType, "NormalizedName", "uima.cas.String", featOkTst);
     casFeatCode_NormalizedName  = (null == casFeat_NormalizedName) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_NormalizedName).getCode();
+
+ 
+    casFeat_Ingredient = jcas.getRequiredFeatureDE(casType, "Ingredient", "uima.cas.StringList", featOkTst);
+    casFeatCode_Ingredient  = (null == casFeat_Ingredient) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Ingredient).getCode();
+
+ 
+    casFeat_ResultingEntity = jcas.getRequiredFeatureDE(casType, "ResultingEntity", "uima.cas.StringList", featOkTst);
+    casFeatCode_ResultingEntity  = (null == casFeat_ResultingEntity) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_ResultingEntity).getCode();
 
   }
 }

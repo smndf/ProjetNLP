@@ -7,11 +7,12 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
 
+import org.apache.uima.jcas.cas.StringList;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Thu Jan 15 11:40:18 CET 2015
+ * Updated by JCasGen Mon Jan 19 16:54:05 CET 2015
  * XML source: C:/Users/Fanny/Documents/2014_2015_Darmstadt/NLP_and_the_Web/ProjetNLP/WebRecipesProject/src/main/resources/desc/type/DirectivesAnnotation.xml
  * @generated */
 public class DirectivesAnnotation extends Annotation {
@@ -118,6 +119,50 @@ public class DirectivesAnnotation extends Annotation {
     if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_NormalizedName == null)
       jcasType.jcas.throwFeatMissing("NormalizedName", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
     jcasType.ll_cas.ll_setStringValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_NormalizedName, v);}    
+   
+    
+  //*--------------*
+  //* Feature: Ingredient
+
+  /** getter for Ingredient - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public StringList getIngredient() {
+    if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_Ingredient == null)
+      jcasType.jcas.throwFeatMissing("Ingredient", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
+    return (StringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_Ingredient)));}
+    
+  /** setter for Ingredient - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setIngredient(StringList v) {
+    if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_Ingredient == null)
+      jcasType.jcas.throwFeatMissing("Ingredient", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
+    jcasType.ll_cas.ll_setRefValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_Ingredient, jcasType.ll_cas.ll_getFSRef(v));}    
+   
+    
+  //*--------------*
+  //* Feature: ResultingEntity
+
+  /** getter for ResultingEntity - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public StringList getResultingEntity() {
+    if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_ResultingEntity == null)
+      jcasType.jcas.throwFeatMissing("ResultingEntity", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
+    return (StringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_ResultingEntity)));}
+    
+  /** setter for ResultingEntity - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setResultingEntity(StringList v) {
+    if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_ResultingEntity == null)
+      jcasType.jcas.throwFeatMissing("ResultingEntity", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
+    jcasType.ll_cas.ll_setRefValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_ResultingEntity, jcasType.ll_cas.ll_getFSRef(v));}    
   }
 
     
