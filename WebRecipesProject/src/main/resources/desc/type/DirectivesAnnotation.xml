@@ -23,7 +23,7 @@
         <featureDescription>
           <name>Ingredient</name>
           <description/>
-          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
         <featureDescription>
           <name>ResultingEntity</name>

@@ -48,64 +48,60 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 			e.printStackTrace();
 		}
 		Dictionary dictionary = Dictionary.getInstance();
-		HashSet<String> hSet = new HashSet<String>();
-		IndexWord indexWord = null;
-		try {
-			indexWord = dictionary.lookupIndexWord(POS.NOUN, "beef");
-			System.out.println("indexword : " + indexWord);
-			if (indexWord != null) {
-				Synset[] set = indexWord.getSenses();
-				if (set != null) {
-					for (Synset s:set) {
-						Pointer[] pointerArr = s.getPointers(PointerType.HYPERNYM);
-						if (pointerArr != null)
-							for (Pointer x : pointerArr) {
-								for (Word w:x.getTargetSynset().getWords()){
-									hSet.add(w.getLemma());
-								}
-							}
-					}
-				}
-			}
-		} catch (JWNLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("hypernym de beef : " + hSet);
+		
 
 
 
 		for (Annotation a : JCasUtil.selectCovered(jcas, Annotation.class, begin, end)){
-
 			if (a.getType().getShortName().equals("VP")){
-
 				DirectivesAnnotation d = new DirectivesAnnotation(jcas);
 				d.setBegin(a.getBegin());
 				d.setEnd(a.getEnd());
-				//List<String> ingredients = new ArrayList<String>();
-				StringList ingredients = new StringList(jcas);
+				ArrayList<String> ingredients = new ArrayList<String>();
 				for (Annotation b : JCasUtil.selectCovered(jcas, Annotation.class, a.getBegin(), a.getEnd())){
 					if (b.getType().getShortName().equals("V")){
 						d.setInstruction(b.getCoveredText());
 					}
 					if (b.getType().getShortName().equals("NN")){
-						d.setIngredient(ingredients.);
+						for (IngredientAnnotation iA : JCasUtil.select(jcas,IngredientAnnotation.class)){
+							if(b.getCoveredText().equals(iA.getCoveredText()))
+								ingredients.add(b.getCoveredText());
+							else {
+								try {
+									IndexWord indexWord = null;
+									indexWord = dictionary.lookupIndexWord(POS.NOUN, b.getCoveredText());
+									System.out.println("indexword : " + indexWord);
+									if (indexWord != null) {
+										Synset[] set = indexWord.getSenses();
+										if (set != null) {
+											for (Synset s:set) {
+												Pointer[] pointerArr = s.getPointers(PointerType.HYPERNYM);
+												if (pointerArr != null)
+													for (Pointer x : pointerArr) {
+														for (Word w:x.getTargetSynset().getWords()){
+															System.out.println(w.getLemma()+ " = "+ b.getCoveredText());
+															if(iA.getCoveredText().equals(w.getLemma())){
+																System.out.println(w.getLemma()+ " = "+ iA.getCoveredText()+ " ajouté");
+																ingredients.add(b.getCoveredText());
+															}
+														}
+													}
+											}
+										}
+									}
+								} catch (JWNLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
 					}
 
 				}
+				d.setIngredient(ingredients.toString());
 				d.addToIndexes();
 			}  
-
-			if (a.getType().getShortName().equals("")){
-				for (String s : hset){
-
-					DirectivesAnnotation d = new DirectivesAnnotation(jcas);
-					d.setBegin(a.getBegin());
-					d.setEnd(a.getEnd());
-					d.setInstruction(a.getCoveredText());
-					d.addToIndexes();
-				}
-			}
 		}
-	}    
+	}
 }
+

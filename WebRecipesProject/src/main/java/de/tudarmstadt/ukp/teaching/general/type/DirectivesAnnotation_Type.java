@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon Jan 19 16:54:05 CET 2015
+ * Updated by JCasGen Thu Jan 22 11:12:37 CET 2015
  * @generated */
 public class DirectivesAnnotation_Type extends Annotation_Type {
   /** @generated 
@@ -102,19 +102,19 @@ public class DirectivesAnnotation_Type extends Annotation_Type {
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
-  public int getIngredient(int addr) {
+  public String getIngredient(int addr) {
         if (featOkTst && casFeat_Ingredient == null)
       jcas.throwFeatMissing("Ingredient", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
-    return ll_cas.ll_getRefValue(addr, casFeatCode_Ingredient);
+    return ll_cas.ll_getStringValue(addr, casFeatCode_Ingredient);
   }
   /** @generated
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
-  public void setIngredient(int addr, int v) {
+  public void setIngredient(int addr, String v) {
         if (featOkTst && casFeat_Ingredient == null)
       jcas.throwFeatMissing("Ingredient", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
-    ll_cas.ll_setRefValue(addr, casFeatCode_Ingredient, v);}
+    ll_cas.ll_setStringValue(addr, casFeatCode_Ingredient, v);}
     
   
  
@@ -162,7 +162,7 @@ public class DirectivesAnnotation_Type extends Annotation_Type {
     casFeatCode_NormalizedName  = (null == casFeat_NormalizedName) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_NormalizedName).getCode();
 
  
-    casFeat_Ingredient = jcas.getRequiredFeatureDE(casType, "Ingredient", "uima.cas.StringList", featOkTst);
+    casFeat_Ingredient = jcas.getRequiredFeatureDE(casType, "Ingredient", "uima.cas.String", featOkTst);
     casFeatCode_Ingredient  = (null == casFeat_Ingredient) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Ingredient).getCode();
 
  

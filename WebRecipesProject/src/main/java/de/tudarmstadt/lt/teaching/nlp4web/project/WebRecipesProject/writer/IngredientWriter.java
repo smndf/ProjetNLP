@@ -38,7 +38,7 @@ public class IngredientWriter extends JCasConsumer_ImplBase {
 		for (DirectivesAnnotation a : JCasUtil.select(jcas, DirectivesAnnotation.class)) { 
 			sb.append("[" + a.getType().getShortName() + "] ");
 			sb.append("(" + a.getBegin() + ", " + a.getEnd() + ") ");
-			sb.append(a.getCoveredText());
+			sb.append(a.getInstruction() + "  " + a.getIngredient());
 			sb.append(LF);
 		}
 		sb.append(LF);

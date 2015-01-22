@@ -12,8 +12,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon Jan 19 16:54:05 CET 2015
- * XML source: C:/Users/Fanny/Documents/2014_2015_Darmstadt/NLP_and_the_Web/ProjetNLP/WebRecipesProject/src/main/resources/desc/type/DirectivesAnnotation.xml
+ * Updated by JCasGen Thu Jan 22 11:12:36 CET 2015
+ * XML source: /Users/simondif/Documents/workspace/ProjetNLP/WebRecipesProject/src/main/resources/desc/type/DirectivesAnnotation.xml
  * @generated */
 public class DirectivesAnnotation extends Annotation {
   /** @generated
@@ -128,19 +128,19 @@ public class DirectivesAnnotation extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public StringList getIngredient() {
+  public String getIngredient() {
     if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_Ingredient == null)
       jcasType.jcas.throwFeatMissing("Ingredient", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
-    return (StringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_Ingredient)));}
+    return jcasType.ll_cas.ll_getStringValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_Ingredient);}
     
   /** setter for Ingredient - sets  
    * @generated
    * @param v value to set into the feature 
    */
-  public void setIngredient(StringList v) {
+  public void setIngredient(String v) {
     if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_Ingredient == null)
       jcasType.jcas.throwFeatMissing("Ingredient", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
-    jcasType.ll_cas.ll_setRefValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_Ingredient, jcasType.ll_cas.ll_getFSRef(v));}    
+    jcasType.ll_cas.ll_setStringValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_Ingredient, v);}    
    
     
   //*--------------*
