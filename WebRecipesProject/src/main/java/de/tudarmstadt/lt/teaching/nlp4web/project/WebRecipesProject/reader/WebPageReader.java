@@ -84,7 +84,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 		}
 		
 		//jcas.setDocumentText(textIngredients);//recipe);
-		String docText = titleRecipe + "\n" + textRecipe + "\n" + textIngredients ;
+		String docText = titleRecipe + "\n" + "$$$" + "\n" + textRecipe + "\n" + "$$$" + "\n" + textIngredients ;
 		jcas.setDocumentText(docText);
 		i++;
 	}
