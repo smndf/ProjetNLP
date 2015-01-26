@@ -15,6 +15,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
+import de.tudarmstadt.ukp.teaching.general.type.TextIngredients;
+import de.tudarmstadt.ukp.teaching.general.type.TextInstructions;
+
 public class WebPageReader extends JCasCollectionReader_ImplBase {
 	
 
@@ -72,7 +76,7 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 	public void getNext(JCas jcas) throws IOException, CollectionException {
 		jcas.setDocumentLanguage(language);
 		
-		String titleRecipe = docTitle.select("h1").text(); // proposition : select("title").text()
+		String titleRecipe = docTitle.select("title").text();
 		String textRecipe = docRecipe.select("span.plaincharacterwrap").text();
 		
 		// old version : String textIngredients = docIngredients.select("ul.ingredient-wrap").text();
@@ -83,8 +87,20 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 			textIngredients += e.text()+".\n";
 		}
 		
-		//jcas.setDocumentText(textIngredients);//recipe);
-		String docText = titleRecipe + "\n" + "$$$" + "\n" + textRecipe + "\n" + "$$$" + "\n" + textIngredients ;
+		String docText = titleRecipe + "\n" + "$$$" + "\n";
+		TextIngredients ing = new TextIngredients(jcas);
+		ing.setBegin(docText.length());
+		docText += textIngredients ;
+		ing.setEnd(docText.length()-1);
+		ing.addToIndexes();
+		
+		docText += "\n" + "$$$" + "\n" ;
+		TextInstructions instruc = new TextInstructions(jcas);
+		instruc.setBegin(docText.length());
+		docText += textRecipe;
+		instruc.setEnd(docText.length()-1);
+		instruc.addToIndexes();
+		
 		jcas.setDocumentText(docText);
 		i++;
 	}

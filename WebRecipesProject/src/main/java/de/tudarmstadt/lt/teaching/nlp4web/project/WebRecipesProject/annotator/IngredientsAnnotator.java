@@ -19,6 +19,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP;
 import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
+import de.tudarmstadt.ukp.teaching.general.type.TextIngredients;
 import de.tudarmstadt.ukp.teaching.general.type.UnitAnnotation;
 
 public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
@@ -37,7 +38,8 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 //        String REGEX5 = INGREDIENT+" "+QUALIFIERS;
         
 		// we are processing the Ingredient patterns sentence by sentence
-		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
+		for (TextIngredients text : JCasUtil.select(jcas, TextIngredients.class))
+		for (Sentence sentence : JCasUtil.selectCovered(jcas, Sentence.class, text)) {
 
 			// for all UnitAnnotation in this sentence
 			for (UnitAnnotation quantity : JCasUtil.selectCovered(jcas, UnitAnnotation.class,

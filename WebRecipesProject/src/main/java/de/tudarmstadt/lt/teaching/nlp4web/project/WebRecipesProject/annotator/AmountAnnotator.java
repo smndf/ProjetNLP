@@ -17,7 +17,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
  * @author Solene, Killian
  *
  */
-public class AmountAnnotator extends JCasAnnotator_ImplBase{
+public class AmountAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
