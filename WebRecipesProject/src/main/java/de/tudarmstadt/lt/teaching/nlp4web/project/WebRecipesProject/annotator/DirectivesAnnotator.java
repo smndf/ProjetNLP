@@ -34,14 +34,16 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
-		String doc = jcas.getDocumentText();
+		/* 
+		 * DEPRECATED
+		 * String doc = jcas.getDocumentText();
 		String[] documents = doc.split("\\$\\$\\$");
 		System.out.println("documents[1] " + documents[0]);
 		System.out.println("documents[2]" + documents[1]);
 		System.out.println("documents[3]" + documents[2]);
 		int len = documents[1].length();
 		int begin = documents[0].length();
-		int end = begin + len;
+		int end = begin + len;*/
 
 		try {
 			JWNL.initialize(new FileInputStream("src/main/resources/properties.xml"));

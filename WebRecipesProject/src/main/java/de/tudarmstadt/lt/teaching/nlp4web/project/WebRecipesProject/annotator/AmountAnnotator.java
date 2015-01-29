@@ -11,6 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.teaching.general.type.TextIngredients;
 
 /** 
  * KO : Fix StandfordParser oversights for CARD annotations
@@ -27,23 +29,32 @@ public class AmountAnnotator extends JCasAnnotator_ImplBase {
 		String regex = amount;
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(document);
-
-		while (m.find()) {
-			// Test if the number is already annotated with CARD
-			if (JCasUtil.selectCovered(jcas, CARD.class, m.start(), m.end()).size() != 0) {
-				continue;
+		
+		for (TextIngredients text : JCasUtil.select(jcas, TextIngredients.class)) {
+			for (Sentence sentence : JCasUtil.selectCovered(jcas, Sentence.class, text)) {
+				for (Token t : JCasUtil.selectCovered(jcas, Token.class, sentence)) {
+					// Test if is a number
+					if (t.getCoveredText().matches(regex)) {
+						System.out.println("POS : "+t.getPos().getClass().getName());
+						// Test if the number is already annotated with CARD
+						if (! (t.getPos() instanceof CARD) ) { //JCasUtil.selectCovered(jcas, CARD.class, t.getBegin(), t.getEnd()).size() == 0) {
+							// Create the CARD annotation
+							CARD a = new CARD(jcas);
+							a.setBegin(t.getBegin());
+							a.setEnd(t.getEnd());
+							a.addToIndexes();
+							System.out.println("[AmountAnnotator] number found : "
+											+ t.getCoveredText()
+											+ "\n"
+											+ sentence.getCoveredText()
+											+ "\n-------------");
+						}
+					}
+				}
 			}
-				
-			CARD a = new CARD(jcas);
-			a.setBegin(m.start());
-			a.setEnd(m.end());
-			a.addToIndexes();
-			System.out.println("[AmountAnnotator] number found : "+m.group()
-					+"\n"+JCasUtil.selectCovered(jcas, Sentence.class, m.start(), m.end()).get(0).getCoveredText()
-					+"\n-------------");
 
 		}
 
-	}	
-	
+	}
+
 }

@@ -17,6 +17,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP;
 import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
 import de.tudarmstadt.ukp.teaching.general.type.TextIngredients;
@@ -48,9 +49,18 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 //					continue;
 //				}
 				try {
-					// check the covered NP (noun chunk)
+					// check the covered NP (noun chunk) but don't consider the expressions
+					// in brackets
+					int beginSearch;
+					List<PRN> prns = JCasUtil.selectCovered(jcas, PRN.class,
+							quantity);
+					if (prns.size() > 0 ) {
+						beginSearch = prns.get(prns.size()-1).getEnd();
+					} else {
+						beginSearch = quantity.getBegin();
+					}
 					List<NP> nps = JCasUtil.selectCovered(jcas, NP.class,
-							quantity.getBegin(), sentence.getEnd());
+							beginSearch, sentence.getEnd());
 					NP np = nps.get(0);
 					NN ingredient = checkNP(jcas, np, quantity.getEnd()+1, quantity, sentence);
 					setIngredientAnnotation(jcas, ingredient, quantity);
@@ -84,8 +94,8 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 			List<NN> nouns = JCasUtil.selectCovered(jcas,
 					NN.class, searchAreaStart,
 					np.getEnd());
-			System.out.println("nouns.size() "+quantity.getCoveredText()+" = "+nouns.size());
 			int nbNN = nouns.size(); 
+			System.out.println("nouns.size() "+quantity.getCoveredText()+" = "+nbNN);
 			if (nbNN == 0) {
 				// !! maybe mistake in unit of UnitAnnotation (e.g. 2 potatoes -> [2][potato] instead of [2][null]
 				
@@ -128,6 +138,7 @@ public class IngredientsAnnotator extends JCasAnnotator_ImplBase{
 			ingredient = JCasUtil.selectCovered(jcas, NN.class,
 								quantity.getBegin(), quantity.getEnd()).get(0);
 			// remove it from text covered by the UnitAnnotation
+			System.out.println("NN removed : "+ingredient.getCoveredText());
 			quantity.setUnit(null);
 			quantity.setEnd(ingredient.getBegin() - 1);
 		} 

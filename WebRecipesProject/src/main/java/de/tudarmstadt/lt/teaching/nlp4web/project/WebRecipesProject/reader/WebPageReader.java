@@ -18,6 +18,7 @@ import org.jsoup.select.Elements;
 import de.tudarmstadt.ukp.teaching.general.type.IngredientAnnotation;
 import de.tudarmstadt.ukp.teaching.general.type.TextIngredients;
 import de.tudarmstadt.ukp.teaching.general.type.TextInstructions;
+import de.tudarmstadt.ukp.teaching.general.type.TitleAnnotation;
 
 public class WebPageReader extends JCasCollectionReader_ImplBase {
 	
@@ -87,17 +88,21 @@ public class WebPageReader extends JCasCollectionReader_ImplBase {
 			textIngredients += e.text()+".\n";
 		}
 		
-		String docText = titleRecipe + "\n" + "$$$" + "\n";
+		TitleAnnotation title = new TitleAnnotation(jcas);
+		title.setTitle(titleRecipe);
+		title.addToIndexes();
+		
+		String docText = "" ;
 		TextIngredients ing = new TextIngredients(jcas);
 		ing.setBegin(docText.length());
-		docText += textIngredients ;
+		docText += "\n"+textIngredients ;
 		ing.setEnd(docText.length()-1);
 		ing.addToIndexes();
 		
-		docText += "\n" + "$$$" + "\n" ;
+		docText += "\n" ;
 		TextInstructions instruc = new TextInstructions(jcas);
 		instruc.setBegin(docText.length());
-		docText += textRecipe;
+		docText += "\n" + textRecipe;
 		instruc.setEnd(docText.length()-1);
 		instruc.addToIndexes();
 		
