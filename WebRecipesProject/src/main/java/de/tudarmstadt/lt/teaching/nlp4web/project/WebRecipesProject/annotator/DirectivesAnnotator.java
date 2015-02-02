@@ -45,11 +45,9 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 		//int begin = documents[0].length();
 
 		//int end = begin + len;*/
-		String previous = "";
-		String resultingEntity = "resultingEntity";
-		boolean addPrevious = false;
+
 		int vEnd = 0;
-		
+
 
 		try {
 			JWNL.initialize(new FileInputStream("src/main/resources/properties.xml"));
@@ -63,11 +61,13 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 		Dictionary dictionary = Dictionary.getInstance();
 
 
+		String resultingEntity = "";
 		for (TextInstructions text : JCasUtil.select(jcas,
 				TextInstructions.class)) {
 
 			for (Annotation a : JCasUtil.selectCovered(jcas, Annotation.class,
 					text)) {
+
 				// a.getType().getShortName());
 				System.out.println("annotation type : "+a.getType().getShortName()+" : " + a.getCoveredText());
 				if (a.getType().getShortName().equals("VP")) {
@@ -77,8 +77,11 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 						if (b.getType().getShortName().equals("VP")) nbVP++;
 					}
 					if (nbVP==1){
-						System.out.println("VP type : "+a.getType().getShortName()+" : " + a.getCoveredText());
-						addPrevious = false;
+						String previous = resultingEntity;
+						boolean addPrevious = false;
+
+						//System.out.println("VP type : "+a.getType().getShortName()+" : " + a.getCoveredText());
+						//addPrevious = false;
 						DirectivesAnnotation d = new DirectivesAnnotation(jcas);
 						d.setBegin(a.getBegin());
 						d.setEnd(a.getEnd());
@@ -91,9 +94,11 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 								textIngredientLemma = l.getValue();
 							}
 							// //// check verb to find instructions
+
 							if (textIngredient.getType().getShortName().equals("V")) {
 								vEnd = textIngredient.getEnd();
 								d.setInstruction(textIngredientLemma);
+								resultingEntity = textIngredientLemma+"ed[" + previous;
 							}
 							int ppBegin = textIngredient.getBegin();
 							if ((ppBegin == (vEnd+1)) && (textIngredient.getType().getShortName().equals("PP"))) {
@@ -107,8 +112,10 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 
 									// //// ingredients / recipes match
 									if (textIngredientLemma.equals(ingredient
-											.getNormalizedName()))
+											.getNormalizedName())){
 										ingredients.add(textIngredientLemma);
+										resultingEntity += " " +  textIngredientLemma;
+									}
 									else {
 										Boolean hypernymFound = false;
 										// //// ingredient's hypernym / recipes
@@ -147,6 +154,7 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 																		ingredients
 																		.add(textIngredientLemma);
 																		hypernymFound = true;
+																		resultingEntity = resultingEntity + " " + ingredient.getNormalizedName();
 																	}
 																}
 															}
@@ -210,6 +218,7 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 																				.add(ingredient
 																						.getNormalizedName());
 																				alreadyAdded = true;
+																				resultingEntity = resultingEntity + " " + ingredient.getNormalizedName();
 																			}
 																		}
 																	}
@@ -227,11 +236,29 @@ public class DirectivesAnnotator extends JCasAnnotator_ImplBase {
 							}
 
 						}
+						String ing = "";
+						resultingEntity = resultingEntity + " ]";
 						if (addPrevious){
-							d.setIngredient(previous + "," + ingredients.toString());							
-						} else {
-							d.setIngredient(ingredients.toString());
+							if (!previous.equals("")){
+								ing = " "+previous;								
+							} else {
+								ing = previous;
+							}						
 						}
+
+						for (int i=0;i<ingredients.size();i++){
+							ing = ing + " " + ingredients.get(i);
+							System.out.println("AAAA " + ingredients.get(i));
+							System.out.println("BBBB " + ing);
+						}
+						
+						if (ing == ""){
+							ing = " " +resultingEntity;
+						}
+
+
+						d.setIngredient(ing);
+
 						d.setResultingEntity(resultingEntity);
 						d.addToIndexes();
 						previous = resultingEntity;

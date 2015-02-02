@@ -79,8 +79,8 @@ public class ExtractionPipeline {
 		        		unitWriter,
 		        		ingredientAnnotator,
 		        		directivesAnnotator,
-		        		ingredientWriter,
-		        		unitWriter
+		        		unitWriter,
+		        		ingredientWriter
 		        		);
 		    }
 
