@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu Jan 22 11:12:37 CET 2015
+ * Updated by JCasGen Thu Jan 29 11:32:16 CET 2015
  * @generated */
 public class DirectivesAnnotation_Type extends Annotation_Type {
   /** @generated 
@@ -126,19 +126,19 @@ public class DirectivesAnnotation_Type extends Annotation_Type {
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
-  public int getResultingEntity(int addr) {
+  public String getResultingEntity(int addr) {
         if (featOkTst && casFeat_ResultingEntity == null)
       jcas.throwFeatMissing("ResultingEntity", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
-    return ll_cas.ll_getRefValue(addr, casFeatCode_ResultingEntity);
+    return ll_cas.ll_getStringValue(addr, casFeatCode_ResultingEntity);
   }
   /** @generated
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
-  public void setResultingEntity(int addr, int v) {
+  public void setResultingEntity(int addr, String v) {
         if (featOkTst && casFeat_ResultingEntity == null)
       jcas.throwFeatMissing("ResultingEntity", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
-    ll_cas.ll_setRefValue(addr, casFeatCode_ResultingEntity, v);}
+    ll_cas.ll_setStringValue(addr, casFeatCode_ResultingEntity, v);}
     
   
 
@@ -166,7 +166,7 @@ public class DirectivesAnnotation_Type extends Annotation_Type {
     casFeatCode_Ingredient  = (null == casFeat_Ingredient) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Ingredient).getCode();
 
  
-    casFeat_ResultingEntity = jcas.getRequiredFeatureDE(casType, "ResultingEntity", "uima.cas.StringList", featOkTst);
+    casFeat_ResultingEntity = jcas.getRequiredFeatureDE(casType, "ResultingEntity", "uima.cas.String", featOkTst);
     casFeatCode_ResultingEntity  = (null == casFeat_ResultingEntity) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_ResultingEntity).getCode();
 
   }

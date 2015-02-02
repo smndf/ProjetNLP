@@ -12,7 +12,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Thu Jan 22 11:12:36 CET 2015
+ * Updated by JCasGen Thu Jan 29 11:32:16 CET 2015
  * XML source: /Users/simondif/Documents/workspace/ProjetNLP/WebRecipesProject/src/main/resources/desc/type/DirectivesAnnotation.xml
  * @generated */
 public class DirectivesAnnotation extends Annotation {
@@ -150,19 +150,19 @@ public class DirectivesAnnotation extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public StringList getResultingEntity() {
+  public String getResultingEntity() {
     if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_ResultingEntity == null)
       jcasType.jcas.throwFeatMissing("ResultingEntity", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
-    return (StringList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_ResultingEntity)));}
+    return jcasType.ll_cas.ll_getStringValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_ResultingEntity);}
     
   /** setter for ResultingEntity - sets  
    * @generated
    * @param v value to set into the feature 
    */
-  public void setResultingEntity(StringList v) {
+  public void setResultingEntity(String v) {
     if (DirectivesAnnotation_Type.featOkTst && ((DirectivesAnnotation_Type)jcasType).casFeat_ResultingEntity == null)
       jcasType.jcas.throwFeatMissing("ResultingEntity", "de.tudarmstadt.ukp.teaching.general.type.DirectivesAnnotation");
-    jcasType.ll_cas.ll_setRefValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_ResultingEntity, jcasType.ll_cas.ll_getFSRef(v));}    
+    jcasType.ll_cas.ll_setStringValue(addr, ((DirectivesAnnotation_Type)jcasType).casFeatCode_ResultingEntity, v);}    
   }
 
     
